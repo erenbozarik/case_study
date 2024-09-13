@@ -2,6 +2,7 @@
 # Van Gogh Style Transfer Workflow - ComfyUI
 
 This repository contains a ComfyUI workflow for transforming input images into a Van Gogh-style output using Stable Diffusion and ControlNet. Follow the instructions below to set up the environment and use the provided workflow.
+- [Download Van Gogh Style Transfer Workflow JSON](/CaseStudy_130924.json)
 
 ## Prerequisites
 
