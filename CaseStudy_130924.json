@@ -1,0 +1,637 @@
+{
+  "last_node_id": 33,
+  "last_link_id": 43,
+  "nodes": [
+    {
+      "id": 29,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": 31.229110717773438,
+        "1": 919.349365234375
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            35,
+            36
+          ],
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            34
+          ],
+          "slot_index": 2,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "vanGoghDiffusion_v1.ckpt"
+      ]
+    },
+    {
+      "id": 32,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1511.2291259765625,
+        "1": 169.34860229492188
+      },
+      "size": {
+        "0": 507.996826171875,
+        "1": 557.5661010742188
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 37
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 24,
+      "type": "LoadImage",
+      "pos": {
+        "0": 71.22911071777344,
+        "1": 149.3486328125
+      },
+      "size": {
+        "0": 485.6841125488281,
+        "1": 462.43243408203125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "goran-eidens-6T7kfc3VitU-unsplash.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 25,
+      "type": "Canny",
+      "pos": {
+        "0": 601.2293090820312,
+        "1": 149.3486328125
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 24
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            26,
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Canny"
+      },
+      "widgets_values": [
+        0.2,
+        0.6
+      ]
+    },
+    {
+      "id": 28,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": 611.2293090820312,
+        "1": 309.3485107421875
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            29
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "control_v11p_sd15_canny.pth"
+      ]
+    },
+    {
+      "id": 26,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 961.2289428710938,
+        "1": 149.3486328125
+      },
+      "size": {
+        "0": 278.2859191894531,
+        "1": 246
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 26
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 27,
+      "type": "ControlNetApply",
+      "pos": {
+        "0": 721.2293090820312,
+        "1": 489.3486633300781
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 98
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 32
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 29
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 41
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            33
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 19,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 541.2293090820312,
+        "1": 1069.349365234375
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 35
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "blurry, low quality, pixelated, out of focus, poorly drawn, deformed, cartoonish, flat colors, smooth surfaces, digital artifacts, abstract shapes, unrealistic details, muted colors, dull, boring composition, nsfw, watermarked, 3D render, grainy, overexposed"
+      ]
+    },
+    {
+      "id": 31,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1041.2291259765625,
+        "1": 989.3491821289062
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 38
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 18,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 541.2293090820312,
+        "1": 819.3488159179688
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 36
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            32
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A painting in the style of Van Gogh, with thick, swirling brushstrokes and vivid colors. A vibrant landscape with a bright yellow sky, deep blue shadows, and bold, textured details, 8k, realistic"
+      ]
+    },
+    {
+      "id": 30,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 1311.2291259765625,
+        "1": 1149.349365234375
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            31
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        768,
+        1
+      ]
+    },
+    {
+      "id": 20,
+      "type": "KSampler",
+      "pos": {
+        "0": 1311.2291259765625,
+        "1": 829.3488159179688
+      },
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 40
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 33
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 22
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 31
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            38
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        433301286035480,
+        "randomize",
+        24,
+        6.5,
+        "dpmpp_3m_sde_gpu",
+        "karras",
+        1
+      ]
+    }
+  ],
+  "links": [
+    [
+      22,
+      19,
+      0,
+      20,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      24,
+      24,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      26,
+      25,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      28,
+      0,
+      27,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      31,
+      30,
+      0,
+      20,
+      3,
+      "LATENT"
+    ],
+    [
+      32,
+      18,
+      0,
+      27,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      33,
+      27,
+      0,
+      20,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      34,
+      29,
+      2,
+      31,
+      1,
+      "VAE"
+    ],
+    [
+      35,
+      29,
+      1,
+      19,
+      0,
+      "CLIP"
+    ],
+    [
+      36,
+      29,
+      1,
+      18,
+      0,
+      "CLIP"
+    ],
+    [
+      37,
+      31,
+      0,
+      32,
+      0,
+      "IMAGE"
+    ],
+    [
+      38,
+      20,
+      0,
+      31,
+      0,
+      "LATENT"
+    ],
+    [
+      40,
+      29,
+      0,
+      20,
+      0,
+      "MODEL"
+    ],
+    [
+      41,
+      25,
+      0,
+      27,
+      2,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Van-gogh-CaseStudy",
+      "bounding": [
+        12,
+        9,
+        2099,
+        1315
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "Canny Apply Process",
+      "bounding": [
+        44,
+        56,
+        1226,
+        671
+      ],
+      "color": "#a1309b",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.4665073802097337,
+      "offset": [
+        586.935123269212,
+        168.85746672661026
+      ]
+    }
+  },
+  "version": 0.4
+}
